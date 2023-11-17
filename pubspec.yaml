@@ -22,7 +22,19 @@ dependencies:
   get_storage:
 
   # For time formatting
-  intl: ^0.18.1
+  intl:
+
+  #  For svg images
+  flutter_svg:
+
+  # For text styling
+  google_fonts:
+
+  # For bottom navigation bar
+  persistent_bottom_nav_bar:
+
+
+
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +61,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/svg/
+    - assets/images/png/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

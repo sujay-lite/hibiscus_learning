@@ -13,7 +13,12 @@ export 'app/common/util/utils.dart';
 export 'app/common/storage/storage.dart';
 
 ///Widgets
-
+export 'app/modules/widgets/ios_back_button.dart';
+export 'app/modules/widgets/library_card.dart';
+export 'app/modules/widgets/text_chip.dart';
+export 'app/modules/widgets/article_points.dart';
+export 'app/modules/widgets/article_summary.dart';
+export 'app/modules/widgets/reviewed_by_doctor.dart';
 
 
 ///Libraries
@@ -24,6 +29,9 @@ export 'package:get/get.dart';
 export 'dart:math';
 export 'dart:async';
 export 'package:get_storage/get_storage.dart';
+export 'package:flutter_svg/svg.dart';
+export 'package:google_fonts/google_fonts.dart';
+export 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 
 ///Strings
@@ -37,8 +45,46 @@ export 'package:get_storage/get_storage.dart';
 export 'app/routes/app_pages.dart';
 
 //Home
-export 'app//modules/home/bindings/home_bindings.dart';
+export 'app/modules/home/bindings/home_bindings.dart';
 export 'app/modules/home/controllers/home_controller.dart';
 export 'app/modules/home/views/home_view.dart';
+
+//Article Template 1
+export 'app/modules/article_template1/controller/article_template1_controller.dart';
+export 'app/modules/article_template1/bindings/article_template1_bindings.dart';
+export 'app/modules/article_template1/views/article_template1.view.dart';
+
+//Article Template 2
+export 'app/modules/article_template2/controller/article_template2_controller.dart';
+export 'app/modules/article_template2/bindings/article_template2_bindings.dart';
+export 'app/modules/article_template2/views/article_template2.view.dart';
+
+//Article Template 3
+export 'app/modules/article_template3/controller/article_template3_controller.dart';
+export 'app/modules/article_template3/bindings/article_template3_bindings.dart';
+export 'app/modules/article_template3/views/article_template3.view.dart';
+
+//Article Template 4
+export 'app/modules/article_template4/controller/article_template4_controller.dart';
+export 'app/modules/article_template4/bindings/article_template4_bindings.dart';
+export 'app/modules/article_template4/views/article_template4.view.dart';
+
+//Article Template 5
+export 'app/modules/article_template5/controller/article_template5_controller.dart';
+export 'app/modules/article_template5/bindings/article_template5_bindings.dart';
+export 'app/modules/article_template5/views/article_template5.view.dart';
+
+//Article Template 6
+export 'app/modules/article_template6/controller/article_template6_controller.dart';
+export 'app/modules/article_template6/bindings/article_template6_bindings.dart';
+export 'app/modules/article_template6/views/article_template6.view.dart';
+
+
+
+
+//Library
+export 'app/modules/library/bindings/library_bindings.dart';
+export 'app/modules/library/controllers/library_controllers.dart';
+export 'app/modules/library/views/library_views.dart';
 
 ///Models and APIs
