@@ -1,9 +1,10 @@
+import 'package:hibiscus_learning/app/common/util/extensions.dart';
 import 'package:hibiscus_learning/import.dart';
 
 class LibraryController extends GetxController {
 
-  final double height = Get.height;
-  final double width = Get.width;
+  final ApiHelper _apiHelper = Get.put<ApiHelper>(ApiHelperImpl());
+  List<ArticleModel> articleList = List<ArticleModel>.empty(growable: true).obs;
 
   late PageController pageController;
   var currentIndex = 0.obs;
@@ -11,22 +12,35 @@ class LibraryController extends GetxController {
   var isBusy = false.obs;
   var unreadNotificationFlag = false.obs;
 
-  List<String> screensToGo = ['/articletemplate1','/articeltemplate2','/articletemplate3','/articletemplate4','/articletemplate5'];
+  List<String> screensToGo = ['/articletemplate1', '/articeltemplate2'];
 
+  List<String> subContentType = [
+    Strings.all,
+    Strings.diet,
+    Strings.medication,
+    Strings.bloodSugar,
+    Strings.complications,
+    Strings.mentalHealth,
+    Strings.meditation,
+    Strings.pain
+  ];
 
-  List<String> contentType = [Strings.shorts,Strings.articles, Strings.audioClips, Strings.live];
-
-  List<String> subContentType = [Strings.all, Strings.diet, Strings.medication, Strings.bloodSugar, Strings.complications, Strings.mentalHealth, Strings.meditation, Strings.pain];
-
-  final List<String> trendingTitleList = [Strings.meditationTips,Strings.eatingHealthy, Strings.diabetesTreatment, Strings.regularExercise];
-  final List<String> trendingTitleTypes = [Strings.video, Strings.audio, Strings.articles, Strings.shorts];
-  final List<String> trendingImageList = [AppImages.clMeditation, AppImages.clEating, AppImages.clDiabetes, AppImages.clExercise];
-  final List<String> contentTitleList = [Strings.toxicFoods,Strings.selfCare, Strings.diabetesTreatment, Strings.regularExercise, Strings.toxicFoods, Strings.selfCare,Strings.diabetesTreatment, Strings.regularExercise];
-  final List<String> contentImageList = [AppImages.clToxic, AppImages.clSelfCare,AppImages.clDiabetes, AppImages.clExercise];
-
-  final List<String> contentTypes = [Strings.shorts, Strings.articles, Strings.audioClips, Strings.live];
-
-  final List<String> subContentTypes = [Strings.all, Strings.diet, Strings.medication, Strings.bloodSugar, Strings.complications, Strings.complications, Strings.mentalHealth, Strings.medication, Strings.pain];
+  final List<String> contentTitleList = [
+    Strings.toxicFoods,
+    Strings.selfCare,
+    Strings.diabetesTreatment,
+    Strings.regularExercise,
+    Strings.toxicFoods,
+    Strings.selfCare,
+    Strings.diabetesTreatment,
+    Strings.regularExercise
+  ];
+  final List<String> contentImageList = [
+    AppImages.clToxic,
+    AppImages.clSelfCare,
+    AppImages.clDiabetes,
+    AppImages.clExercise
+  ];
 
 
   @override
@@ -47,4 +61,29 @@ class LibraryController extends GetxController {
     pageController.animateToPage(index,
         duration: const Duration(seconds: 300), curve: Curves.slowMiddle);
   }
+
+
+  @override
+  void onReady() {
+    print("----------------------------------------------");
+    getArticles();
+    super.onReady();
+  }
+
+  Future<void> getArticles() async {
+    _apiHelper.getArticle().futureValue((value) {
+      print("==============================");
+      var articlesResponse = ArticleData.fromJson(value);
+
+      articleList.assignAll(articlesResponse.data ?? []);
+      print("😍😍😍😍");
+      print(articleList[0].attributes?.title);
+    }, onError : (error) {
+      if (kDebugMode) {
+        print("Get Articles $error");
+      }
+    });
+  }
+
+
 }

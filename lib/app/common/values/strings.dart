@@ -4,6 +4,14 @@ abstract class Strings {
   static const noConnection = 'No connection. Please turn on your internet!';
   static const unAuthorize = 'Unauthorized. Please login again!';
 
+  static const String ok = 'Ok';
+  static const String cancel = 'Cancel';
+  static const String error = 'Error';
+  static const String noInternet = 'No internet. Please try again later.';
+
+  static const success = 'Success';
+  static const String somethingWentWrong = 'Something went wrong.';
+
   static const appName = 'Hibiscus Health';
 
 
@@ -13,7 +21,7 @@ abstract class Strings {
   static const String decrement = 'Decrement';
 
   ///Library Module
-  static const String titleLibrary = "Library";
+  static const String learn = "Learn";
   static const String trending = "Trending";
   static const String browseContent = "Browse Content";
   //Content type

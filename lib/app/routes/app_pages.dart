@@ -4,50 +4,50 @@ part 'app_routes.dart';
 
 abstract class AppPages {
   static const INITIAL =
-      // Routes.articleTemplate3Screen;
+      //Routes.facialRecognition;
+      // Routes.articleTemplate1Screen;
       Routes.libraryScreen;
-      //Routes.landingScreen;
 
   static final routes = [
     GetPage(
-        name: _Paths.HOME,
+        name: _Paths.home,
         page: ()=> const HomeView(),
         binding: HomeBinding(),
     ),
     GetPage(
-        name: _Paths.LIBRARY,
+        name: _Paths.library,
         page: ()=> const LibraryView(),
         binding: LibraryBinding(),
     ),
     GetPage(
-      name: _Paths.ARTICLETEMPLATE1,
+      name: _Paths.articleTemplate1,
       page: ()=> const ArticleTemplateView1(),
       binding: ArticleTemplate1Binding(),
     ),
     GetPage(
-        name: _Paths.ARTICLETEMPLATE2,
+        name: _Paths.articleTemplate2,
         page: ()=> const ArticleTemplateView2(),
         binding: ArticleTemplate2Binding(),
     ),
     GetPage(
-        name: _Paths.ARTICLETEMPLATE3,
+        name: _Paths.articleTemplate3,
         page: ()=> const ArticleTemplateView3(),
         binding: ArticleTemplate3Binding(),
     ),
     GetPage(
-        name: _Paths.ARTICLETEMPLATE4,
+        name: _Paths.articleTemplate4,
         page: ()=> const ArticleTemplateView4(),
         binding: ArticleTemplate4Binding(),
     ),
     GetPage(
-        name: _Paths.ARTICLETEMPLATE5,
+        name: _Paths.articleTemplate5,
         page: ()=>const ArticleTemplateView5(),
         binding: ArticleTemplate5Binding(),
     ),
     GetPage(
-        name: _Paths.ARTICLETEMPLATE6,
+        name: _Paths.articleTemplate6,
         page: ()=> const ArticleTemplateView5(),
         binding: ArticleTemplate6Binding(),
-    ),
+    )
   ];
 }

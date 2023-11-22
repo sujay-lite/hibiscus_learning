@@ -2,8 +2,10 @@ abstract class AppImages {
   ///Add app images here
 
   static const String home = "assets/images/png/homeIcon.png";
-  static const String library = "assets/images/png/libraryIcon.png";
-  static const String insight = "assets/images/png/insightIcon.png";
+  static const String learn = "assets/images/png/learnIcon.png";
+  static const String more = "assets/images/png/moreIcon.png";
+  static const String progress = "assets/images/png/progressIcon.png";
+  static const String checkIn = "assets/images/png/checkinIcon.png";
 
 
   static const String greenVerified = "assets/images/svg/greenVerified.svg";

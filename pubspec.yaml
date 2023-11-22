@@ -33,8 +33,14 @@ dependencies:
   # For bottom navigation bar
   persistent_bottom_nav_bar:
 
+  #For camera integration
+  camera:
 
+  #For handling app permissions
+  permission_handler:
 
+  #For shimmer placeholders
+  shimmer:
 
 dev_dependencies:
   flutter_test:

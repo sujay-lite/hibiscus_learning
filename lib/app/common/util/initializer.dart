@@ -1,6 +1,7 @@
 import 'package:hibiscus_learning/import.dart';
 
 abstract class Initializer {
+
   static void init(VoidCallback runApp) {
 
     runZonedGuarded(() async {
@@ -22,6 +23,9 @@ abstract class Initializer {
       await _initStorage();
 
       _initScreenPreference();
+
+      // await _initCamera();
+
     } catch (err) {
       rethrow;
     }
@@ -39,9 +43,20 @@ abstract class Initializer {
   }
 }
 
-class InitialBindings extends Bindings {
-  @override
-  void dependencies() {
+  // Future<void> _initCamera() async{
+  //   List<CameraDescription> _cameras = <CameraDescription>[];
+  //     try {
+  //       _cameras = await availableCameras();
+  //     } on CameraException catch (e) {
+  //     if (kDebugMode) {
+  //       print('Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
+  //     }
+  //   }
+  // }
 
-  }
+  class InitialBindings extends Bindings {
+    @override
+    void dependencies() {
+
+    }
 }

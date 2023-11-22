@@ -1,14 +1,14 @@
 import 'package:hibiscus_learning/import.dart';
 
 abstract class Utils {
-
   static void closeSnackBar() {
     if (Get.isSnackbarOpen == true) {
       Get.back();
     }
   }
 
-  static assetSVGImage(String imagePath, {double? height, double? width, Color? color}) {
+  static assetSVGImage(String imagePath,
+      {double? height, double? width, Color? color}) {
     return SvgPicture.asset(
       imagePath,
       height: height,
@@ -16,7 +16,8 @@ abstract class Utils {
     );
   }
 
-  static assetImage(String imagePath, {Color? color, double? height, double? width}) {
+  static assetImage(String imagePath,
+      {Color? color, double? height, double? width}) {
     return Image.asset(
       imagePath,
       width: width,
@@ -25,7 +26,96 @@ abstract class Utils {
     );
   }
 
-   static TextStyle kHeadingTextStyle = GoogleFonts.inter(
+  static void loadingDialog() {
+    Utils.closeDialog();
+    Get.dialog(
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  static void closeDialog() {
+    if (Get.isDialogOpen == true) {
+      Get.back();
+    }
+  }
+
+
+
+  static void showDialog(
+      String? message, {
+        String title = Strings.error,
+        bool success = false,
+        VoidCallback? onTap,
+      }) =>
+      Get.defaultDialog(
+        barrierDismissible: false,
+        onWillPop: () async {
+          Get.back();
+
+          onTap?.call();
+
+          return true;
+        },
+        title: success ? Strings.success : title,
+        content: Text(
+          message ?? Strings.somethingWentWrong,
+          textAlign: TextAlign.center,
+          maxLines: 6,
+        ),
+        confirm: Align(
+          alignment: Alignment.centerRight,
+          child: CustomInkwellWidget.text(
+            onTap: () {
+              Get.back();
+
+              onTap?.call();
+            },
+            title: Strings.ok,
+          ),
+        ),
+      );
+
+  static void showIconDialog(
+      String title,
+      String message, {
+        Widget? imageWidget,
+        VoidCallback? onTap,
+      }) =>
+      Get.dialog(
+        AlertDialog(
+          title:
+          imageWidget ?? const Icon(Icons.done), //add your icon/image here
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10.w),
+              Text(message,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20.w),
+              CustomTextButton(
+                title: Strings.ok,
+                onPressed: () {
+                  Get.back();
+
+                  onTap?.call();
+                },
+              ),
+            ],
+          ),
+        ),
+        barrierDismissible: false,
+      );
+
+
+
+  static TextStyle kHeadingTextStyle = GoogleFonts.inter(
     textStyle: const TextStyle(
       fontSize: 17,
       fontWeight: FontWeight.bold,
@@ -35,20 +125,13 @@ abstract class Utils {
 
   static TextStyle kParagraphTextStyle = GoogleFonts.inter(
     textStyle: const TextStyle(
-      color: AppColors.kPrimaryColorText,
-      height: 1.5,
-      fontSize: 14
-    ),
+        color: AppColors.kPrimaryColorText, height: 1.5, fontSize: 14),
   );
 
   static TextStyle kSmallText = GoogleFonts.inter(
     textStyle: const TextStyle(
-        color: AppColors.kPrimaryColorText,
-        height: 1.4,
-        fontSize: 12
-    ),
+        color: AppColors.kPrimaryColorText, height: 1.4, fontSize: 12),
   );
-
 
   static TextStyle kVerySmallText = GoogleFonts.inter(
     textStyle: const TextStyle(
@@ -57,17 +140,16 @@ abstract class Utils {
     ),
   );
 
-  static bottomNavigationBar(var controller, bool unreadNotificationFlag) => Theme(
-    data: ThemeData(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-    ),
-    child:   Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+  static bottomNavigationBar(var controller, bool unreadNotificationFlag) =>
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           boxShadow: [
-            BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+            BoxShadow(
+                color: AppColors.black.withOpacity(0.6),
+                spreadRadius: 0,
+                blurRadius: 10),
           ],
         ),
         child: ClipRRect(
@@ -87,99 +169,150 @@ abstract class Utils {
             },
             destinations: [
               NavigationDestination(
-                selectedIcon:  Column(
+                selectedIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    assetImage(AppImages.home),
-                    const SizedBox(height: 4),
-                    const Text("Home", style: TextStyle(color: Colors.white),)
+                    assetImage(AppImages.home, color: AppColors.kSecColor),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Home",
+                      style: TextStyle(color: AppColors.kSecColor),
+                    )
                   ],
                 ),
                 icon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    assetImage(AppImages.home,color: AppColors.grey),
-                    const SizedBox(height: 4),
-                    const Text("Home", style: TextStyle(color: Colors.grey),)
-                  ],
-                ),
-                label: '',
-              ),
-              const NavigationDestination(
-                selectedIcon:  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.emoji_emotions_rounded, size: 30, weight: 30, color: Colors.white),
-                    Text("Check in", style: TextStyle(color: Colors.white),)
-                  ],
-                ),
-                icon: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.emoji_emotions_rounded, size: 30, weight: 30, color: Colors.grey,),
-                    Text("Check in", style: TextStyle(color: Colors.grey),)
+                    assetImage(AppImages.home, color: AppColors.grey),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Home",
+                      style: TextStyle(color: Colors.grey),
+                    )
                   ],
                 ),
                 label: '',
               ),
               NavigationDestination(
-                selectedIcon:  Column(
+                selectedIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    assetImage(AppImages.insight),
-                    const SizedBox(height: 4),
-                    const Text("Insights", style: TextStyle(color: Colors.white),)
+                    assetImage(AppImages.progress, color: AppColors.kSecColor),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Progress",
+                      style: TextStyle(color: AppColors.kSecColor),
+                    )
                   ],
                 ),
                 icon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    assetImage(AppImages.insight, color: AppColors.grey),
-                    const SizedBox(height: 4),
-                    const Text("Insights", style: TextStyle(color: Colors.grey),)
+                    assetImage(AppImages.progress, color: AppColors.grey),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Progress",
+                      style: TextStyle(color: Colors.grey),
+                    )
                   ],
                 ),
                 label: '',
               ),
               NavigationDestination(
-                selectedIcon:  Column(
+                selectedIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    assetImage(AppImages.library),
-                    const SizedBox(height: 4),
-                    const Text("Library", style: TextStyle(color: Colors.white),)
+                    assetImage(AppImages.checkIn, color: AppColors.kSecColor),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Check-in",
+                      style: TextStyle(color: AppColors.kSecColor),
+                    )
                   ],
                 ),
                 icon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    assetImage(AppImages.library,color: AppColors.grey),
-                    const SizedBox(height: 4),
-                    const Text("Library", style: TextStyle(color: Colors.grey),)
+                    assetImage(AppImages.checkIn, color: AppColors.grey),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Check-in",
+                      style: TextStyle(color: Colors.grey),
+                    )
                   ],
                 ),
                 label: '',
               ),
-              const NavigationDestination(
-                selectedIcon:  Column(
+              NavigationDestination(
+                selectedIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.account_circle_rounded, size: 30, weight: 30, color: Colors.white),
-                    Text("Profile", style: TextStyle(color: Colors.white),)
+                    assetImage(AppImages.learn, color: AppColors.kSecColor),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Learn",
+                      style: TextStyle(color: AppColors.kSecColor),
+                    )
                   ],
                 ),
                 icon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.account_circle_rounded, size: 30, weight: 30, color: Colors.grey),
-                    Text("Profile", style: TextStyle(color: Colors.grey),)
+                    assetImage(AppImages.learn, color: AppColors.grey),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Learn",
+                      style: TextStyle(color: Colors.grey),
+                    )
+                  ],
+                ),
+                label: '',
+              ),
+              NavigationDestination(
+                selectedIcon: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    assetImage(AppImages.more, color: AppColors.kSecColor),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "More",
+                      style: TextStyle(color: AppColors.kSecColor),
+                    )
+                  ],
+                ),
+                icon: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    assetImage(AppImages.more, color: AppColors.grey),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "More",
+                      style: TextStyle(color: Colors.grey),
+                    )
                   ],
                 ),
                 label: '',
               ),
             ],
           ),
-        )),
-  );
+        ),
+      );
 
+  static void closeSnackbar() {
+    if (Get.isSnackbarOpen == true) {
+      Get.back();
+    }
+  }
+
+  static void showSnackbar(String? message) {
+    closeSnackbar();
+
+    Get.rawSnackbar(message: message);
+  }
+
+  static void goBackToScreen(String routeName) {
+    Get.until(
+      (route) => route.settings.name == routeName,
+    );
+  }
 }
