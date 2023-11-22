@@ -1,7 +1,6 @@
-import 'package:hibiscus_learning/import.dart';
+import '../../../import.dart';
 
 extension FutureExt<T> on Future<Response<T>?> {
-
   void futureValue(
       Function(T value) response, {
         Function(String? error)? onError,
@@ -55,11 +54,6 @@ extension FutureExt<T> on Future<Response<T>?> {
                 ? null
                 : () {
               Storage.clearStorage();
-              // Get.offAllNamed(
-              //   Routes.LOGIN,
-              //   //change the ROUTE to the LOGIN or SPLASH screen so that the
-              //   //user can login again on UnauthorizeError error
-              // );
             },
           );
         }

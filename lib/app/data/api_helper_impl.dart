@@ -32,9 +32,6 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
 
   @override
   Future<Response<dynamic>> getArticle(){
-    if(kDebugMode) {
-      print(get(Constants.articleUrl));
-    }
     return get(Constants.articleUrl);
   }
 }

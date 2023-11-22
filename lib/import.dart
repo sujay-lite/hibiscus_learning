@@ -92,11 +92,11 @@ export 'app/modules/library/views/library_views.dart';
 
 
 ///Models and APIs
-export 'package:hibiscus_learning/app/common/data/api_helper.dart';
-export 'package:hibiscus_learning/app/common/data/api_helper_impl.dart';
-export 'package:hibiscus_learning/app/common/data/api_reponse.dart';
-export 'package:hibiscus_learning/app/common/data/errors/api_errors.dart';
-export 'package:hibiscus_learning/app/common/data/interface_controller/api_interface_controller.dart';
+export 'package:hibiscus_learning/app/data/api_helper.dart';
+export 'package:hibiscus_learning/app/data/api_helper_impl.dart';
+export 'package:hibiscus_learning/app/data/api_reponse.dart';
+export 'package:hibiscus_learning/app/data/errors/api_errors.dart';
+export 'package:hibiscus_learning/app/data/interface_controller/api_interface_controller.dart';
 
 //Models
-export 'package:hibiscus_learning/app/common/data/models/article_model.dart';
+export 'package:hibiscus_learning/app/data/models/article_model.dart';

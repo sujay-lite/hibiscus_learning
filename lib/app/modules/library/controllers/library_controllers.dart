@@ -65,19 +65,17 @@ class LibraryController extends GetxController {
 
   @override
   void onReady() {
-    print("----------------------------------------------");
     getArticles();
+
     super.onReady();
   }
 
   Future<void> getArticles() async {
-    _apiHelper.getArticle().futureValue((value) {
-      print("==============================");
+    _apiHelper.getArticle().futureValue(
+            (value) {
       var articlesResponse = ArticleData.fromJson(value);
 
       articleList.assignAll(articlesResponse.data ?? []);
-      print("😍😍😍😍");
-      print(articleList[0].attributes?.title);
     }, onError : (error) {
       if (kDebugMode) {
         print("Get Articles $error");

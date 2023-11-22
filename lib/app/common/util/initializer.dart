@@ -24,8 +24,6 @@ abstract class Initializer {
 
       _initScreenPreference();
 
-      // await _initCamera();
-
     } catch (err) {
       rethrow;
     }
@@ -43,20 +41,15 @@ abstract class Initializer {
   }
 }
 
-  // Future<void> _initCamera() async{
-  //   List<CameraDescription> _cameras = <CameraDescription>[];
-  //     try {
-  //       _cameras = await availableCameras();
-  //     } on CameraException catch (e) {
-  //     if (kDebugMode) {
-  //       print('Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
-  //     }
-  //   }
-  // }
 
-  class InitialBindings extends Bindings {
-    @override
-    void dependencies() {
-
-    }
+class InitialBindings extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<ApiHelper>(
+          () => ApiHelperImpl(),
+    );
+    Get.lazyPut<ApiInterfaceController>(
+          () => ApiInterfaceController(),
+    );
+  }
 }
