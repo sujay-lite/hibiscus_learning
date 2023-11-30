@@ -58,6 +58,7 @@ abstract class Strings {
   static const String articleBy = "By Hibiscus Health";
   static const String reviewedBy = "REVIEWED BY";
   static const String writtenBy = "WRITTEN BY";
+  static const String references = "References";
   static const String doctorName = "Dr. Tamiris Nascimento";
   static const String doctorQualification = "Professor of lorem and ipsum, University Hospital of Lorem Ipsum, 40+ years in lorem and ipsum";
   static const String articlePart1 ="A healthy diet plays a crucial role in maintaining optimal health and well-being. Medically guided recommendations for a healthy diet provide valuable guidelines for individuals seeking to improve their nutrition and overall quality of life. In this infographic, we explore the key components of a healthy diet, their benefits, and the significance of following medically backed dietary guidelines.";
@@ -101,8 +102,6 @@ abstract class Strings {
   static const String articleSummary = "Prioritizing a healthy diet is a proactive step towards maintaining good health and preventing diseases. By following medically guided recommendations, you can make informed choices that nourish your body, promote vitality, and contribute to a long and healthy life.";
 
   static const String articleDisclaimer = "Disclaimer: This infographic is for informational purposes only and should not replace personalized medical advice. Consult with a healthcare professional or registered dietitian for tailored dietary recommendations based on your individual health needs.";
-
-  static const String references = "References";
 
   static const String referenceText = '''Harvard T.H. Chan School of Public Health - "The Nutrition Source"
   Website: https://www.hsph.harvard.edu/nutritionsource/

@@ -37,6 +37,8 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 export 'package:camera/camera.dart';
 export 'package:shimmer/shimmer.dart';
+export 'package:cached_network_image/cached_network_image.dart';
+export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 
 ///Strings
@@ -99,4 +101,4 @@ export 'package:hibiscus_learning/app/data/errors/api_errors.dart';
 export 'package:hibiscus_learning/app/data/interface_controller/api_interface_controller.dart';
 
 //Models
-export 'package:hibiscus_learning/app/data/models/article_model.dart';
+export 'app/data/models/article_model.dart';

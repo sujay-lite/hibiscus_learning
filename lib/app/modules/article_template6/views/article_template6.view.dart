@@ -166,8 +166,6 @@ class ArticleTemplateView6 extends GetView<ArticleTemplateView6> {
                   ],
                 ),
               ),
-              bottomNavigationBar: Obx(() => Utils.bottomNavigationBar(
-                  controller, controller.unreadNotificationFlag.value))
           ),
         );
       }

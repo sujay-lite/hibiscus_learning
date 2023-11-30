@@ -4,7 +4,11 @@ import 'package:hibiscus_learning/import.dart';
 class LibraryController extends GetxController {
 
   final ApiHelper _apiHelper = Get.put<ApiHelper>(ApiHelperImpl());
-  List<ArticleModel> articleList = List<ArticleModel>.empty(growable: true).obs;
+  // List<ArticleModel> articleList = List<ArticleModel>.empty(growable: true).obs;
+
+  var isLoading = false.obs;
+
+  final PagingController<int, ArticleModel> pagingController = PagingController(firstPageKey: 0);
 
   late PageController pageController;
   var currentIndex = 0.obs;
@@ -46,11 +50,12 @@ class LibraryController extends GetxController {
   @override
   void onInit() async {
     isBusy.value = true;
-    pageController = PageController(initialPage: 0);
+
+    pagingController.addPageRequestListener((pageKey) {
+      getArticles(pageNumber: pageKey);
+    });
+
     isBusy.value = false;
-    if (pageController.hasClients) {
-      pageController.jumpToPage(0);
-    }
     super.onInit();
   }
 
@@ -70,18 +75,38 @@ class LibraryController extends GetxController {
     super.onReady();
   }
 
-  Future<void> getArticles() async {
-    _apiHelper.getArticle().futureValue(
-            (value) {
-      var articlesResponse = ArticleData.fromJson(value);
+  Future<void> getArticles({int pageNumber = 1}) async {
+    isLoading.value = true;
 
-      articleList.assignAll(articlesResponse.data ?? []);
-    }, onError : (error) {
-      if (kDebugMode) {
-        print("Get Articles $error");
-      }
-    });
+    try {
+      _apiHelper.getArticle(pageNumber).futureValue(
+              (value) {
+            var articlesResponse = ArticleData.fromJson(value);
+
+            final bool isLastPage = articlesResponse.data!.length < 25;
+            if (isLastPage) {
+              pagingController.appendLastPage(articlesResponse.data!.toList());
+            } else {
+              var nextPage = pageNumber + 1;
+              pagingController.appendPage(
+                  articlesResponse.data!.toList(), nextPage);
+            }
+
+            // articleList.assignAll(articlesResponse.data ?? []);
+            isLoading.value = false;
+          }, onError: (error) {
+        if (kDebugMode) {
+          print("Get Articles $error");
+        }
+      });
+    } catch (e){
+      pagingController.error = e;
+    }
   }
 
-
+  @override
+  void onClose() {
+    pagingController.dispose();
+    super.onClose();
+  }
 }

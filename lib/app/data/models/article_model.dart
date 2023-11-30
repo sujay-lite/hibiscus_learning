@@ -28,14 +28,14 @@ class ArticleData {
 
 class ArticleModel {
   int? id;
-  Attributes? attributes;
+  ArticleAttributes? attributes;
 
   ArticleModel({this.id, this.attributes});
 
   ArticleModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     attributes = json['attributes'] != null
-        ?  Attributes.fromJson(json['attributes'])
+        ?  ArticleAttributes.fromJson(json['attributes'])
         : null;
   }
 
@@ -49,7 +49,7 @@ class ArticleModel {
   }
 }
 
-class Attributes {
+class ArticleAttributes {
   String? title;
   String? conclusion;
   String? createdAt;
@@ -68,9 +68,9 @@ class Attributes {
   List<BulletPoint>? bulletPoints;
   CustomImage? customImage;
   List<TitleBulletPoint>? titleBulletPoint;
-  ReviewerImage? reviewerImage;
+  ReviewerImageResponse? reviewerImageResponse;
 
-  Attributes(
+  ArticleAttributes(
       {this.title,
         this.conclusion,
         this.createdAt,
@@ -89,9 +89,9 @@ class Attributes {
         this.bulletPoints,
         this.customImage,
         this.titleBulletPoint,
-        this.reviewerImage});
+        this.reviewerImageResponse});
 
-  Attributes.fromJson(Map<String, dynamic> json) {
+  ArticleAttributes.fromJson(Map<String, dynamic> json) {
     title = json['Title'];
     conclusion = json['Conclusion'];
     createdAt = json['createdAt'];
@@ -127,8 +127,8 @@ class Attributes {
         titleBulletPoint!.add( TitleBulletPoint.fromJson(v));
       });
     }
-    reviewerImage = json['ReviewerImage'] != null
-        ? ReviewerImage.fromJson(json['ReviewerImage'])
+    reviewerImageResponse = json['ReviewerImage'] != null
+        ? ReviewerImageResponse.fromJson(json['ReviewerImage'])
         : null;
   }
 
@@ -161,8 +161,8 @@ class Attributes {
       data['TitleBulletPoint'] =
           titleBulletPoint!.map((v) => v.toJson()).toList();
     }
-    if (reviewerImage != null) {
-      data['ReviewerImage'] = reviewerImage!.toJson();
+    if (reviewerImageResponse != null) {
+      data['ReviewerImage'] = reviewerImageResponse!.toJson();
     }
     return data;
   }
@@ -210,18 +210,66 @@ class BulletPoint {
 }
 
 class CustomImage {
-  ArticleModel? data;
+  ReviewerImageResponse? reviewerImage;
 
-  CustomImage({this.data});
+  CustomImage({this.reviewerImage});
 
   CustomImage.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? ArticleModel.fromJson(json['data']) : null;
+    reviewerImage = json['CustomImage'] != null
+        ? ReviewerImageResponse.fromJson(json['CustomImage'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (reviewerImage != null) {
+      data['CustomImage'] = reviewerImage!.toJson();
+    }
+    return data;
+  }
+}
+
+class ReviewerImageResponse {
+  List<ImageInformation>? data;
+
+  ReviewerImageResponse({this.data});
+
+  ReviewerImageResponse.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <ImageInformation>[];
+      json['data'].forEach((v) {
+        data!.add( ImageInformation.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data =  <String, dynamic>{};
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class ImageInformation {
+  int? id;
+  ImageAttributes? attributes;
+
+  ImageInformation({this.id, this.attributes});
+
+  ImageInformation.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    attributes = json['attributes'] != null
+        ? ImageAttributes.fromJson(json['attributes'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data =  <String, dynamic>{};
+    data['id'] = id;
+    if (attributes != null) {
+      data['attributes'] = attributes!.toJson();
     }
     return data;
   }
@@ -241,6 +289,7 @@ class ImageAttributes {
   String? url;
   String? previewUrl;
   String? provider;
+  String? providerMetadata;
   String? createdAt;
   String? updatedAt;
 
@@ -258,6 +307,7 @@ class ImageAttributes {
         this.url,
         this.previewUrl,
         this.provider,
+        this.providerMetadata,
         this.createdAt,
         this.updatedAt});
 
@@ -276,12 +326,13 @@ class ImageAttributes {
     url = json['url'];
     previewUrl = json['previewUrl'];
     provider = json['provider'];
+    providerMetadata = json['provider_metadata'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data =  <String, dynamic>{};
     data['name'] = name;
     data['alternativeText'] = alternativeText;
     data['caption'] = caption;
@@ -297,6 +348,7 @@ class ImageAttributes {
     data['url'] = url;
     data['previewUrl'] = previewUrl;
     data['provider'] = provider;
+    data['provider_metadata'] = providerMetadata;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     return data;
@@ -304,24 +356,24 @@ class ImageAttributes {
 }
 
 class Formats {
-  ImageData? large;
-  ImageData? small;
-  ImageData? medium;
-  ImageData? thumbnail;
+  ImageSize? large;
+  ImageSize? small;
+  ImageSize? medium;
+  ImageSize? thumbnail;
 
   Formats({this.large, this.small, this.medium, this.thumbnail});
 
   Formats.fromJson(Map<String, dynamic> json) {
-    large = json['large'] != null ? ImageData.fromJson(json['large']) : null;
-    small = json['small'] != null ? ImageData.fromJson(json['small']) : null;
-    medium = json['medium'] != null ? ImageData.fromJson(json['medium']) : null;
+    large = json['large'] != null ?  ImageSize.fromJson(json['large']) : null;
+    small = json['small'] != null ?  ImageSize.fromJson(json['small']) : null;
+    medium = json['medium'] != null ?  ImageSize.fromJson(json['medium']) : null;
     thumbnail = json['thumbnail'] != null
-        ? ImageData.fromJson(json['thumbnail'])
+        ?  ImageSize.fromJson(json['thumbnail'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data =  <String, dynamic>{};
     if (large != null) {
       data['large'] = large!.toJson();
     }
@@ -338,7 +390,7 @@ class Formats {
   }
 }
 
-class ImageData {
+class ImageSize {
   String? ext;
   String? url;
   String? hash;
@@ -349,7 +401,7 @@ class ImageData {
   int? width;
   int? height;
 
-  ImageData(
+  ImageSize(
       {this.ext,
         this.url,
         this.hash,
@@ -360,7 +412,7 @@ class ImageData {
         this.width,
         this.height});
 
-  ImageData.fromJson(Map<String, dynamic> json) {
+  ImageSize.fromJson(Map<String, dynamic> json) {
     ext = json['ext'];
     url = json['url'];
     hash = json['hash'];
@@ -373,7 +425,7 @@ class ImageData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =<String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['ext'] = ext;
     data['url'] = url;
     data['hash'] = hash;
@@ -416,28 +468,28 @@ class TitleBulletPoint {
   }
 }
 
-class ReviewerImage {
-  List<ArticleModel>? data;
-
-  ReviewerImage({this.data});
-
-  ReviewerImage.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <ArticleModel>[];
-      json['data'].forEach((v) {
-        data!.add( ArticleModel.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+// class ReviewerImage {
+//   List<CustomImage>? data;
+//
+//   ReviewerImage({this.data});
+//
+//   ReviewerImage.fromJson(Map<String, dynamic> json) {
+//     if (json['data'] != null) {
+//       data = <ImageModel>[];
+//       json['data'].forEach((v) {
+//         data!.add( ImageModel.fromJson(v));
+//       });
+//     }
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     if (this.data != null) {
+//       data['data'] = this.data!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
 class Meta {
   Pagination? pagination;

@@ -31,7 +31,10 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
   }
 
   @override
-  Future<Response<dynamic>> getArticle(){
-    return get(Constants.articleUrl);
+  Future<Response<dynamic>> getArticle(int pageNumber){
+    final queryParameters = {
+      'pagination[page]':pageNumber.toString()
+    };
+    return get(Constants.articleUrl, query: queryParameters);
   }
 }

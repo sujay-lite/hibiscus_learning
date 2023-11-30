@@ -16,10 +16,10 @@ class LibraryCard extends StatelessWidget {
       height: 110,
       width: 175,
       decoration: BoxDecoration(
-        color: AppColors.kPrimaryColor,
+        color: AppColors.kGreyText,
         borderRadius: BorderRadius.circular(15),
         image: DecorationImage(
-          image: AssetImage(image),
+          image: NetworkImage(image),
           fit: BoxFit.cover,
         ),
       ),
@@ -44,7 +44,7 @@ class LibraryCard extends StatelessWidget {
             bottom: 10,
             left: 20,
             child: Text(
-              cardTitle,
+              cardTitle.length >12 ? "${cardTitle.substring(0,12)}..." : cardTitle,
               style: Utils.kParagraphTextStyle.copyWith(fontSize: 15,color: AppColors.white, fontWeight: FontWeight.w600),
             ),
           ),

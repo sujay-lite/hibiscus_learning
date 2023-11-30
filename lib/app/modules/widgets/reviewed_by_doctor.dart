@@ -25,49 +25,53 @@ class ReviewedByDoctor extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
-        Stack(
-          children: [
-            CircleAvatar(
-              radius: 20,
-              backgroundImage: AssetImage(doctorImage),
-            ),
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Utils.assetSVGImage(AppImages.greenVerified),
-            ),
-          ],
+        Expanded(
+          flex: 1,
+          child: Stack(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(doctorImage),
+                //AssetImage(doctorImage),
+              ),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Utils.assetSVGImage(AppImages.greenVerified),
+              ),
+            ],
+          ),
         ),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            isReviewedByPresent ?
-            Text(
-              Strings.reviewedBy,
-              style: GoogleFonts.inter(
-                textStyle: const TextStyle(
-                  color: AppColors.kGreyText,
-                  fontSize: 12,
+        Expanded(
+          flex: 7,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              isReviewedByPresent ?
+              Text(
+                Strings.reviewedBy,
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: AppColors.kGreyText,
+                    fontSize: 12,
+                  ),
+                ),
+              ) : const SizedBox(),
+              Text(
+                doctorName,
+                style: GoogleFonts.inter(
+                  textStyle: TextStyle(
+                    color: fontColor,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 12,
+                  ),
                 ),
               ),
-            ) : const SizedBox(),
-            Text(
-              doctorName,
-              style: GoogleFonts.inter(
-                textStyle: TextStyle(
-                  color: fontColor,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 12,
-                ),
-              ),
-            ),
 
-            SizedBox(
-              width: qualificationWidth,
-              child: Text(
+              Text(
                 doctorQualification,
-                maxLines: 5,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.inter(
                   textStyle:  TextStyle(
@@ -77,8 +81,8 @@ class ReviewedByDoctor extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         )
       ],
     );

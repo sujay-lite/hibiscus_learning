@@ -1,6 +1,9 @@
 import 'package:hibiscus_learning/import.dart';
 
 class ArticleTemplate1Controller extends GetxController {
+   ArticleAttributes article = ArticleAttributes();
+   String refText = "";
+
   var isRefCollapsed = true.obs;
 
   late PageController pageController;
@@ -13,12 +16,34 @@ class ArticleTemplate1Controller extends GetxController {
   @override
   void onInit() async {
     isBusy.value = true;
+
     pageController = PageController(initialPage: 0);
-    isBusy.value = false;
     if (pageController.hasClients) {
       pageController.jumpToPage(0);
     }
+
+    getArticleData();
+    getRefText();
+    isBusy.value = false;
     super.onInit();
+  }
+
+  void getRefText(){
+    article.references?.forEach((val) {
+      refText =
+      refText == ""? val.singleReferenceLink! :
+      "$refText\n\n${val.singleReferenceLink!}";
+    });
+  }
+
+  void getArticleData (){
+    try {
+      article = Get.arguments[0];
+    } catch (e){
+      if(kDebugMode){
+        print(e);
+      }
+    }
   }
 
   onSelectedIndexChanged(int index) {

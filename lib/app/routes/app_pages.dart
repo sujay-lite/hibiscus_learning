@@ -21,7 +21,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: _Paths.articleTemplate1,
-      page: ()=> const ArticleTemplateView1(),
+      page: ()=>  const ArticleTemplateView1(),
       binding: ArticleTemplate1Binding(),
     ),
     GetPage(

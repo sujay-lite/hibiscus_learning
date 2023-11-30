@@ -18,33 +18,45 @@ class ArticlePoints extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        extraSpaceForSubpoint ?
-        const SizedBox(width: 15)
-        :const SizedBox(),
-        Utils.assetSVGImage(AppImages.hibiscusFlower,height: 16),
+        extraSpaceForSubpoint ? const SizedBox(width: 15) : const SizedBox(),
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                const SizedBox(height:5 ),
+                content != "null" || subheading != "null"?
+                Utils.assetSVGImage(AppImages.hibiscusFlower, height: 12)
+                : const SizedBox(),
+              ],
+            )),
         const SizedBox(width: 5),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              subheading,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: Utils.kParagraphTextStyle.copyWith(fontWeight: FontWeight.w600),
-            ),
+        Expanded(
+          flex: 20,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              subheading != "null" ?
+              Text(
+                subheading,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+                style: Utils.kParagraphTextStyle
+                    .copyWith(fontWeight: FontWeight.w600),
+              )
+              :const SizedBox(),
 
-            const SizedBox(height: 5),
-            SizedBox(
-              width: extraSpaceForSubpoint ? width-85 : width-70,
-              child: Text(
+              content != "null" ?
+              Text(
                 content,
                 maxLines: 40,
                 overflow: TextOverflow.ellipsis,
                 style: Utils.kParagraphTextStyle,
-              ),
-            ),
-          ],
+              )
+                  : const SizedBox() ,
+            ],
+          ),
         ),
       ],
     );
