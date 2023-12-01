@@ -33,6 +33,7 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
   @override
   Future<Response<dynamic>> getArticle(int pageNumber){
     final queryParameters = {
+      "populate": "deep",
       'pagination[page]':pageNumber.toString()
     };
     return get(Constants.articleUrl, query: queryParameters);

@@ -29,10 +29,14 @@ class ReviewedByDoctor extends StatelessWidget {
           flex: 1,
           child: Stack(
             children: [
+          doctorImage != ""  || doctorImage !="null" ?
               CircleAvatar(
                 radius: 20,
-                backgroundImage: NetworkImage(doctorImage),
-                //AssetImage(doctorImage),
+                backgroundImage:  NetworkImage(doctorImage)
+              ) : CircleAvatar(
+                  radius: 20,
+                  backgroundColor: AppColors.transparent,
+                  child: Utils.assetSVGImage(AppImages.hibiscusIcon),
               ),
               Positioned(
                 right: 0,

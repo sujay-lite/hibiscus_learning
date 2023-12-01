@@ -47,13 +47,19 @@ class ArticleTemplateView1 extends GetView<ArticleTemplateView1> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: SingleChildScrollView(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 20),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: controller.article.image!= null ? Image.network(controller.article.image! , height: 200, width: Get.width, fit: BoxFit.cover,): const SizedBox()
-                            //Image.asset(AppImages.clArticle),
-                          ),
+                          controller.article.image != null
+                              ? ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                controller.article.image!,
+                                height: 200,
+                                width: Get.width,
+                                fit: BoxFit.cover,
+                              ))
+                              : const SizedBox(),
 
                           const SizedBox(height: 20),
 
@@ -88,13 +94,17 @@ class ArticleTemplateView1 extends GetView<ArticleTemplateView1> {
                             ],
                           ),
                           const SizedBox(height: 20),
+                          controller.article.introduction != null ?
                           Text(
                             "${controller.article.introduction}",
                             //Strings.articlePart1,
                             style: Utils.kParagraphTextStyle,
-                          ),
+                          ) : const SizedBox(),
 
-                          const SizedBox(height: 15),
+                          controller.article.bulletPoints != null ||
+                              controller.article.bulletPoints != [] ?
+                          const SizedBox(height: 15)
+                          :const SizedBox(),
 
                           controller.article.bulletPoints != null ||
                                   controller.article.bulletPoints != []
@@ -112,7 +122,7 @@ class ArticleTemplateView1 extends GetView<ArticleTemplateView1> {
                                   },
                                   separatorBuilder:
                                       (BuildContext context, int index) =>
-                                          const SizedBox(),
+                                          const SizedBox(height: 10),
                                 )
                               : const SizedBox(),
 
@@ -127,20 +137,22 @@ class ArticleTemplateView1 extends GetView<ArticleTemplateView1> {
                                     return Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
+                                        const SizedBox(height: 20),
                                         controller.article.titleBulletPoint?[ind].mainTitle != null ?
                                         Text(
                                           "${controller.article.titleBulletPoint?[ind].mainTitle}",
-                                          maxLines: 3,
+                                          maxLines: 10,
                                           overflow: TextOverflow.ellipsis,
                                           style: Utils.kParagraphTextStyle.copyWith(
                                               fontWeight: FontWeight.w600),
                                         ): const SizedBox(),
-                                        const SizedBox(height: 10),
+                                        controller.article.titleBulletPoint?[ind].mainTitle != null ?
+                                        const SizedBox(height: 10) : const SizedBox(),
                                         controller.article.titleBulletPoint?[ind].bulletPoint != null ||
                                                 controller.article.titleBulletPoint![ind].bulletPoint != []
                                             ? ListView.separated(
                                                 itemCount: controller.article
-                                                    .titleBulletPoint![ind].bulletPoint!.length,
+                                                    .titleBulletPoint![ind].bulletPoint?.length ?? 0,
                                                 shrinkWrap: true,
                                                 physics: const NeverScrollableScrollPhysics(),
                                                 itemBuilder: (context, index) {
@@ -158,7 +170,7 @@ class ArticleTemplateView1 extends GetView<ArticleTemplateView1> {
                                                 },
                                               )
                                             : const SizedBox(),
-                                        const SizedBox(height: 20),
+                                        // const SizedBox(height: 20),
                                       ],
                                     );
                                   },
@@ -168,15 +180,17 @@ class ArticleTemplateView1 extends GetView<ArticleTemplateView1> {
                                 )
                               : const SizedBox(),
 
-                          const SizedBox(height: 20),
+                          (controller.article.titleBulletPoint != null ||
+                              controller.article.titleBulletPoint != []) && (controller.article.bulletPoints != null ||
+                              controller.article.bulletPoints != []) ?
+                          const SizedBox(height: 20) : const SizedBox(),
 
-                          controller.article.conclusion != null ?
-                          Text(
+                          (controller.article.summary == null || controller.article.summary == "") || controller.article.conclusion == null ?
+                          const SizedBox()
+                              :Text(
                             "${controller.article.conclusion}",
-                            //Strings.articlePart1,
                             style: Utils.kParagraphTextStyle,
-                          ) :
-                          const SizedBox(),
+                          ),
 
                           const SizedBox(height: 20),
                           controller.article.summary != null || controller.article.conclusion != null ?
