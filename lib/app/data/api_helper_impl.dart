@@ -11,6 +11,7 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
     httpClient.addResponseModifier((request, response) {
       printInfo(
         info: 'Status Code: ${response.statusCode}\n'
+            // TODO: CHANGED HERE
             'Data: ${response.bodyString?.toString() ?? ''}',
       );
       return response;
@@ -31,10 +32,16 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
   }
 
   @override
-  Future<Response<dynamic>> getArticle(int pageNumber){
+  Future<Response<dynamic>> getArticle(int pageNumber, int pageSize,
+      String filterCategory, String searchKeyword) {
     final queryParameters = {
       "populate": "deep",
-      'pagination[page]':pageNumber.toString()
+      'pagination[page]': pageNumber.toString(),
+      'pagination[pageSize]': pageSize.toString(),
+      if (searchKeyword.isNotEmpty)
+        'filters[Title][\$containsi]': searchKeyword,
+      if (filterCategory.isNotEmpty && filterCategory.toLowerCase() != "all")
+        'filters[Category][\$containsi]': filterCategory
     };
     return get(Constants.articleUrl, query: queryParameters);
   }

@@ -29,7 +29,7 @@ class ReviewedByDoctor extends StatelessWidget {
           flex: 1,
           child: Stack(
             children: [
-          doctorImage != ""  || doctorImage !="null" ?
+           doctorImage !="null" ||doctorImage != "" ?
               CircleAvatar(
                 radius: 20,
                 backgroundImage:  NetworkImage(doctorImage)
@@ -62,6 +62,8 @@ class ReviewedByDoctor extends StatelessWidget {
                   ),
                 ),
               ) : const SizedBox(),
+
+              doctorName != "null" || doctorName != ""?
               Text(
                 doctorName,
                 style: GoogleFonts.inter(
@@ -71,8 +73,10 @@ class ReviewedByDoctor extends StatelessWidget {
                     fontSize: 12,
                   ),
                 ),
-              ),
+              )
+              :const SizedBox(),
 
+              doctorQualification != "null" || doctorQualification !="" ?
               Text(
                 doctorQualification,
                 maxLines: 2,
@@ -84,7 +88,7 @@ class ReviewedByDoctor extends StatelessWidget {
                       fontWeight: FontWeight.w500
                   ),
                 ),
-              ),
+              ): const SizedBox(),
             ],
           ),
         )

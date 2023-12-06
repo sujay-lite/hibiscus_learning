@@ -48,6 +48,9 @@ dependencies:
   #For infinite scroll/pagination
   infinite_scroll_pagination:
 
+  #For animated search bar
+  anim_search_bar:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

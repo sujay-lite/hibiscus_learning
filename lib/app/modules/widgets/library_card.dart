@@ -16,7 +16,9 @@ class LibraryCard extends StatelessWidget {
       height: 110,
       width: 175,
       decoration: BoxDecoration(
-        color: AppColors.kGreyText,
+        color: image == "" || image != "null"
+            ? AppColors.kGreyText
+            : AppColors.kPrimaryColor,
         borderRadius: BorderRadius.circular(15),
         image: DecorationImage(
           image: NetworkImage(image),
@@ -25,6 +27,16 @@ class LibraryCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
+          image == "" || image != "null"
+              ? const SizedBox()
+              : Center(
+                  child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Utils.assetSVGImage(
+                    AppImages.hibiscusIcon,
+                  ),
+                ),
+          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
@@ -44,8 +56,13 @@ class LibraryCard extends StatelessWidget {
             bottom: 10,
             left: 20,
             child: Text(
-              cardTitle.length >12 ? "${cardTitle.substring(0,12)}..." : cardTitle,
-              style: Utils.kParagraphTextStyle.copyWith(fontSize: 15,color: AppColors.white, fontWeight: FontWeight.w600),
+              cardTitle.length > 12
+                  ? "${cardTitle.substring(0, 12)}..."
+                  : cardTitle,
+              style: Utils.kParagraphTextStyle.copyWith(
+                  fontSize: 15,
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600),
             ),
           ),
         ],

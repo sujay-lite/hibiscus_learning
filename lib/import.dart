@@ -23,6 +23,7 @@ export 'app/modules/widgets/article_summary.dart';
 export 'app/modules/widgets/reviewed_by_doctor.dart';
 export 'app/modules/widgets/custom_inkwell_widget.dart';
 export 'app/modules/widgets/custom_text_button.dart';
+export 'app/modules/widgets/text_input_field.dart';
 
 ///Libraries
 export 'package:flutter/foundation.dart';
@@ -39,14 +40,11 @@ export 'package:camera/camera.dart';
 export 'package:shimmer/shimmer.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-
+export 'package:anim_search_bar/anim_search_bar.dart';
 
 ///Strings
 
-
 /// Colors
-
-
 
 /// App Pages
 export 'app/routes/app_pages.dart';
@@ -90,8 +88,6 @@ export 'app/modules/article_template6/views/article_template6.view.dart';
 export 'app/modules/library/bindings/library_bindings.dart';
 export 'app/modules/library/controllers/library_controllers.dart';
 export 'app/modules/library/views/library_views.dart';
-
-
 
 ///Models and APIs
 export 'package:hibiscus_learning/app/data/api_helper.dart';

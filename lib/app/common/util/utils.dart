@@ -41,14 +41,12 @@ abstract class Utils {
     }
   }
 
-
-
   static void showDialog(
-      String? message, {
-        String title = Strings.error,
-        bool success = false,
-        VoidCallback? onTap,
-      }) =>
+    String? message, {
+    String title = Strings.error,
+    bool success = false,
+    VoidCallback? onTap,
+  }) =>
       Get.defaultDialog(
         barrierDismissible: false,
         onWillPop: () async {
@@ -78,15 +76,15 @@ abstract class Utils {
       );
 
   static void showIconDialog(
-      String title,
-      String message, {
-        Widget? imageWidget,
-        VoidCallback? onTap,
-      }) =>
+    String title,
+    String message, {
+    Widget? imageWidget,
+    VoidCallback? onTap,
+  }) =>
       Get.dialog(
         AlertDialog(
           title:
-          imageWidget ?? const Icon(Icons.done), //add your icon/image here
+              imageWidget ?? const Icon(Icons.done), //add your icon/image here
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -95,7 +93,8 @@ abstract class Utils {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10.w),
-              Text(message,
+              Text(
+                message,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20.w),
@@ -112,8 +111,6 @@ abstract class Utils {
         ),
         barrierDismissible: false,
       );
-
-
 
   static TextStyle kHeadingTextStyle = GoogleFonts.inter(
     textStyle: const TextStyle(
@@ -137,6 +134,28 @@ abstract class Utils {
     textStyle: const TextStyle(
       color: AppColors.kTierColor,
       fontSize: 9,
+    ),
+  );
+
+  static var kRoundTextFieldDecoration = InputDecoration(
+    hintText: 'Enter',
+    fillColor: AppColors.white.withOpacity(0.7),
+    contentPadding:
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+    border: const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    ),
+    enabledBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 1.0),
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    ),
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 1.5),
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    ),
+    errorBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.kPrimaryColor, width: 1.5),
+      borderRadius: BorderRadius.all(Radius.circular(32.0)),
     ),
   );
 
@@ -169,7 +188,8 @@ abstract class Utils {
                   selectedIcon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.home,height: 20, color: AppColors.kSecColor),
+                      assetImage(AppImages.home,
+                          height: 20, color: AppColors.kSecColor),
                       const SizedBox(height: 5),
                       const Text(
                         "Home",
@@ -180,7 +200,8 @@ abstract class Utils {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.home,height: 20, color: AppColors.grey),
+                      assetImage(AppImages.home,
+                          height: 20, color: AppColors.grey),
                       const SizedBox(height: 5),
                       const Text(
                         "Home",
@@ -194,7 +215,8 @@ abstract class Utils {
                   selectedIcon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.progress,height: 20, color: AppColors.kSecColor),
+                      assetImage(AppImages.progress,
+                          height: 20, color: AppColors.kSecColor),
                       const SizedBox(height: 5),
                       const Text(
                         "Progress",
@@ -205,7 +227,8 @@ abstract class Utils {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.progress,height: 20, color: AppColors.grey),
+                      assetImage(AppImages.progress,
+                          height: 20, color: AppColors.grey),
                       const SizedBox(height: 5),
                       const Text(
                         "Progress",
@@ -219,7 +242,8 @@ abstract class Utils {
                   selectedIcon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.checkIn,height: 20, color: AppColors.kSecColor),
+                      assetImage(AppImages.checkIn,
+                          height: 20, color: AppColors.kSecColor),
                       const SizedBox(height: 5),
                       const Text(
                         "Check-in",
@@ -230,7 +254,8 @@ abstract class Utils {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.checkIn,height: 20, color: AppColors.grey),
+                      assetImage(AppImages.checkIn,
+                          height: 20, color: AppColors.grey),
                       const SizedBox(height: 5),
                       const Text(
                         "Check-in",
@@ -244,7 +269,8 @@ abstract class Utils {
                   selectedIcon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.learn,height: 20, color: AppColors.kSecColor),
+                      assetImage(AppImages.learn,
+                          height: 20, color: AppColors.kSecColor),
                       const SizedBox(height: 5),
                       const Text(
                         "Learn",
@@ -255,7 +281,8 @@ abstract class Utils {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.learn,height: 20, color: AppColors.grey),
+                      assetImage(AppImages.learn,
+                          height: 20, color: AppColors.grey),
                       const SizedBox(height: 5),
                       const Text(
                         "Learn",
@@ -269,7 +296,8 @@ abstract class Utils {
                   selectedIcon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.more,height: 20, color: AppColors.kSecColor),
+                      assetImage(AppImages.more,
+                          height: 20, color: AppColors.kSecColor),
                       const SizedBox(height: 5),
                       const Text(
                         "More",
@@ -280,7 +308,8 @@ abstract class Utils {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      assetImage(AppImages.more,height: 20, color: AppColors.grey),
+                      assetImage(AppImages.more,
+                          height: 20, color: AppColors.grey),
                       const SizedBox(height: 5),
                       const Text(
                         "More",
