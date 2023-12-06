@@ -45,4 +45,13 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
     };
     return get(Constants.articleUrl, query: queryParameters);
   }
+
+  @override
+  Future<Response<dynamic>> getCategories(){
+    final queryParam = {
+      'fields[1]':'category_name'
+    };
+
+    return get(Constants.categoryUrl, query: queryParam);
+  }
 }

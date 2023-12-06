@@ -17,13 +17,11 @@ export 'app/common/util/loading_dialogue.dart';
 ///Widgets
 export 'app/modules/widgets/ios_back_button.dart';
 export 'app/modules/widgets/library_card.dart';
-export 'app/modules/widgets/text_chip.dart';
 export 'app/modules/widgets/article_points.dart';
 export 'app/modules/widgets/article_summary.dart';
 export 'app/modules/widgets/reviewed_by_doctor.dart';
 export 'app/modules/widgets/custom_inkwell_widget.dart';
 export 'app/modules/widgets/custom_text_button.dart';
-export 'app/modules/widgets/text_input_field.dart';
 
 ///Libraries
 export 'package:flutter/foundation.dart';
@@ -98,3 +96,4 @@ export 'package:hibiscus_learning/app/data/interface_controller/api_interface_co
 
 //Models
 export 'app/data/models/article_model.dart';
+export 'app/data/models/category_model.dart';

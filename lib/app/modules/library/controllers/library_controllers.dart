@@ -4,9 +4,12 @@ import 'package:hibiscus_learning/import.dart';
 class LibraryController extends GetxController {
   final ApiHelper _apiHelper = Get.put<ApiHelper>(ApiHelperImpl());
 
-  // List<ArticleModel> articleList = List<ArticleModel>.empty(growable: true).obs;
+  List<ArticleModel> articleList = List<ArticleModel>.empty(growable: true).obs;
+  List<CategoryModel> categoryList =
+      List<CategoryModel>.empty(growable: true).obs;
 
   static const pageSize = 26;
+  var isCategoryLoading = false.obs;
   var isLoading = false.obs;
   var isSearching = false.obs;
   bool isFirst = false;
@@ -14,9 +17,6 @@ class LibraryController extends GetxController {
   var isChipSelected = 0.obs;
   TextEditingController searchKey = TextEditingController();
   final passwordFocusNode = FocusNode();
-
-  final PagingController<int, ArticleModel> pagingController =
-      PagingController(firstPageKey: 0);
 
   late PageController pageController;
   var currentIndex = 0.obs;
@@ -27,19 +27,19 @@ class LibraryController extends GetxController {
 
   List<String> screensToGo = ['/articletemplate1', '/articeltemplate2'];
 
-  List<String> subContentType = [
-    Strings.all,
-    'Kidney',
-    'Hypothyroidism',
-    'Hyperthyroidism',
-    'Hypertension',
-    'ESRD',
-    'Diabetes',
-    'Weight',
-    'Insulin',
-    'Mental health',
-    'Obesity'
-  ];
+  // List<String> subContentType = [
+  //   Strings.all,
+  //   'Kidney',
+  //   'Hypothyroidism',
+  //   'Hyperthyroidism',
+  //   'Hypertension',
+  //   'ESRD',
+  //   'Diabetes',
+  //   'Weight',
+  //   'Insulin',
+  //   'Mental health',
+  //   'Obesity'
+  // ];
 
   final List<String> contentTitleList = [
     Strings.toxicFoods,
@@ -58,18 +58,6 @@ class LibraryController extends GetxController {
     AppImages.clExercise
   ];
 
-  @override
-  void onInit() async {
-    // isBusy.value = true;
-
-    pagingController.addPageRequestListener((pageKey) {
-      getArticles(pageNumber: pageKey);
-    });
-
-    // isBusy.value = false;
-    super.onInit();
-  }
-
   onSelectedIndexChanged(int index) {
     currentIndex.value = index;
     selectedIndex.value = index;
@@ -80,8 +68,26 @@ class LibraryController extends GetxController {
 
   @override
   void onReady() {
+    getCategories();
     getArticles();
     super.onReady();
+  }
+
+  Future<void> getCategories() async {
+    isCategoryLoading.value = true;
+
+    _apiHelper.getCategories().futureValue((value) {
+      print("👍👍👍👍👍👍👍👍👍👍");
+      var categoryResponse = CategoryData.fromJson(value);
+
+      categoryList.assignAll(categoryResponse.data ?? []);
+      print("👍👍👍👍👍👍👍👍${categoryList}");
+    }, onError: (error) {
+      if (kDebugMode) {
+        print("Get Categories $error");
+      }
+    });
+    isCategoryLoading.value = false;
   }
 
   Future<void> getArticles(
@@ -89,60 +95,32 @@ class LibraryController extends GetxController {
       String filterCategory = "",
       String searchKeyword = ""}) async {
     isLoading.value = true;
-    try {
-      _apiHelper
-          .getArticle(pageNumber, pageSize, filterCategory, searchKeyword)
-          .futureValue((value) {
-        var articlesResponse = ArticleData.fromJson(value);
 
-        final bool isLastPage = articlesResponse.data!.length < pageSize;
+    _apiHelper
+        .getArticle(pageNumber, pageSize, filterCategory, searchKeyword)
+        .futureValue((value) {
+      var articlesResponse = ArticleData.fromJson(value);
 
-        if (filterCategory != "") {
-          clearPageData();
-        }
-        if (searchKeyword.isNotEmpty) {
-          clearPageData();
-        }
-
-        // if (isLastPage) {
-        pagingController.appendLastPage(articlesResponse.data!.toList());
-        // } else {
-        //
-        //   var nextPage = pageNumber + 1;
-        //   pagingController.appendPage(
-        //       articlesResponse.data!.toList(), nextPage);
-        // }
-
-        print("😰😰😰😰😰😰😰😰😰😰😰😰😰😰${pagingController.value}");
-      }, onError: (error) {
-        if (kDebugMode) {
-          print("Get Articles $error");
-        }
-      });
-    } catch (e) {
-      pagingController.error = e;
-    }
+      articleList.assignAll(articlesResponse.data ?? []);
+    }, onError: (error) {
+      if (kDebugMode) {
+        print("Get Articles $error");
+      }
+    });
     isLoading.value = false;
   }
 
   @override
   void onClose() {
-    pagingController.dispose();
     super.onClose();
   }
 
-  void clearPageData() {
-    pagingController.refresh();
-  }
-
   void onSearch(String val) {
-    print("$val😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒${searchKey.text}");
     if (val.length > 2) {
-      print("😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒");
-      clearPageData();
       getArticles(
           pageNumber: 1,
-          filterCategory: subContentType[isChipSelected.value],
+          filterCategory:
+              categoryList[isChipSelected.value].attributes?.categoryName ?? "",
           searchKeyword: val);
     }
   }
@@ -153,7 +131,7 @@ class LibraryController extends GetxController {
     print("🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢${searchKey.text}");
     getArticles(
         pageNumber: 1,
-        filterCategory: subContentType[ind],
+        filterCategory: categoryList[ind].attributes?.categoryName ?? "",
         searchKeyword: searchKey.text);
   }
 
