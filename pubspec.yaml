@@ -51,6 +51,9 @@ dependencies:
   #For animated search bar
   anim_search_bar:
 
+  #For step indicator
+  step_progress_indicator:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

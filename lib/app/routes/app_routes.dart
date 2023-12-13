@@ -1,7 +1,6 @@
 part of 'app_pages.dart';
 
 abstract class Routes {
-  static const landingScreen = _Paths.home;
   static const libraryScreen = _Paths.library;
   static const articleTemplate1Screen = _Paths.articleTemplate1;
   static const articleTemplate2Screen = _Paths.articleTemplate2;
@@ -9,10 +8,12 @@ abstract class Routes {
   static const articleTemplate4Screen = _Paths.articleTemplate4;
   static const articleTemplate5Screen = _Paths.articleTemplate5;
   static const articleTemplate6Screen = _Paths.articleTemplate6;
+  static const landingScreen = _Paths.landingPage;
+  static const dailyCheckinScreen = _Paths.dailyCheckinPage;
 }
 
 abstract class _Paths {
-  static const home ='/home';
+  static const home = '/home';
   static const library = '/library';
   static const articleTemplate1 = '/articletemplate1';
   static const articleTemplate2 = '/articeltemplate2';
@@ -20,4 +21,6 @@ abstract class _Paths {
   static const articleTemplate4 = '/articletemplate4';
   static const articleTemplate5 = '/articletemplate5';
   static const articleTemplate6 = '/articletemplate6';
+  static const landingPage = '/landingpage';
+  static const dailyCheckinPage = '/checkinPage';
 }

@@ -111,6 +111,23 @@ abstract class Utils {
         ),
         barrierDismissible: false,
       );
+  static TextStyle kVeryLargeText = GoogleFonts.inter(
+    textStyle: const TextStyle(
+      fontSize: 24,
+    ),
+  );
+
+  static TextStyle kLargeText = GoogleFonts.inter(
+    textStyle: const TextStyle(
+      fontSize: 21,
+    ),
+  );
+
+  static TextStyle kBigText = GoogleFonts.inter(
+    textStyle: const TextStyle(
+      fontSize: 19,
+    ),
+  );
 
   static TextStyle kHeadingTextStyle = GoogleFonts.inter(
     textStyle: const TextStyle(
@@ -159,8 +176,7 @@ abstract class Utils {
     ),
   );
 
-  static bottomNavigationBar(var controller, bool unreadNotificationFlag) =>
-      Container(
+  static bottomNavigationBar(var controller) => Container(
         color: AppColors.white,
         child: Container(
           decoration: const BoxDecoration(

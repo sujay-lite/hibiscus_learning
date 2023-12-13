@@ -228,8 +228,6 @@ class LibraryView extends GetView<LibraryController> {
                 ),
               ),
             ),
-            bottomNavigationBar: Obx(() => Utils.bottomNavigationBar(
-                controller, controller.unreadNotificationFlag.value)),
           ),
         );
       },
