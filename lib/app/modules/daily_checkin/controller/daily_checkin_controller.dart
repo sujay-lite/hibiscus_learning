@@ -1,3 +1,4 @@
+import 'package:hibiscus_learning/app/common/util/extensions.dart';
 import 'package:hibiscus_learning/import.dart';
 
 class DailyCheckinController extends GetxController {
@@ -12,6 +13,8 @@ class DailyCheckinController extends GetxController {
   var currentQuestionIndex = 0.obs;
   var selectedOptionIndex = 100.obs;
 
+  var isLoading = false.obs;
+
   @override
   void onInit() {
     getQuestions();
@@ -22,5 +25,31 @@ class DailyCheckinController extends GetxController {
     checkInQuestions.addAll(CheckInResponse.fromJson(questions).data ?? []);
   }
 
-  // Future
+  void postAnswers() async {
+    List<AnswerModel> modelAnswers = [];
+
+    for (int i = 0; i < answers.length; i++) {
+      modelAnswers
+          .add(AnswerModel(qid: checkInQuestions[i].id, answer: answers[i]));
+    }
+
+    isLoading.value = true;
+    try {
+      _apiHelper
+          .postCheckInAnswers(AnswerResponse(
+        uid: " GET THE UID FROM THE STORAGE",
+        response: modelAnswers,
+      ))
+          .futureValue((value) {
+        print("😴😴😴😴😴😴😴😴$value");
+        isLoading.value = false;
+      }, onError: (error) {
+        print("Daily checkin response error $error");
+        isLoading.value = false;
+      });
+    } catch (e) {
+      print(e);
+      isLoading.value = false;
+    }
+  }
 }

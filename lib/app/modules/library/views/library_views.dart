@@ -94,6 +94,9 @@ class LibraryView extends GetView<LibraryController> {
                                   physics: const ClampingScrollPhysics(),
                                   shrinkWrap: true,
                                   itemBuilder: (context, ind) {
+                                    print("👌👌👌👌👌👌👌👌");
+                                    print(controller.categoryList[ind]
+                                        .attributes?.categoryName);
                                     return Row(
                                       children: [
                                         Obx(

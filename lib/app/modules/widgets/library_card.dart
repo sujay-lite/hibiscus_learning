@@ -31,12 +31,12 @@ class LibraryCard extends StatelessWidget {
               ? const SizedBox()
               : Center(
                   child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Utils.assetSVGImage(
-                    AppImages.hibiscusIcon,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Utils.assetSVGImage(
+                      AppImages.hibiscusIconWhite,
+                    ),
                   ),
                 ),
-          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),

@@ -5,4 +5,6 @@ abstract class ApiHelper {
       String filterCategory, String searchKeyword);
 
   Future<Response> getCategories();
+
+  Future<Response> postCheckInAnswers(AnswerResponse answers);
 }

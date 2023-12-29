@@ -15,12 +15,12 @@ abstract class Routes {
 abstract class _Paths {
   static const home = '/home';
   static const library = '/library';
-  static const articleTemplate1 = '/articletemplate1';
-  static const articleTemplate2 = '/articeltemplate2';
-  static const articleTemplate3 = '/articletemplate3';
-  static const articleTemplate4 = '/articletemplate4';
-  static const articleTemplate5 = '/articletemplate5';
-  static const articleTemplate6 = '/articletemplate6';
-  static const landingPage = '/landingpage';
+  static const articleTemplate1 = '/articleTemplate1';
+  static const articleTemplate2 = '/articleTemplate2';
+  static const articleTemplate3 = '/articleTemplate3';
+  static const articleTemplate4 = '/articleTemplate4';
+  static const articleTemplate5 = '/articleTemplate5';
+  static const articleTemplate6 = '/articleTemplate6';
+  static const landingPage = '/landingPage';
   static const dailyCheckinPage = '/checkinPage';
 }

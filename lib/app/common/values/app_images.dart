@@ -9,6 +9,8 @@ abstract class AppImages {
 
   static const String greenVerified = "assets/images/svg/greenVerified.svg";
   static const String hibiscusIcon = "assets/images/svg/hibiscusIcon.svg";
+  static const String hibiscusIconWhite =
+      "assets/images/svg/hibiscusIconWhite.svg";
   static const String hibiscusFlower = "assets/images/svg/hibiscusFlower.svg";
 
   static const String defaultArticleImage =

@@ -7,8 +7,9 @@ abstract class AppPages {
       //Routes.facialRecognition;
       // Routes.articleTemplate1Screen;
       // Routes.libraryScreen;
-      // Routes.landingScreen;
-      Routes.dailyCheckinScreen;
+      Routes.landingScreen;
+
+  // Routes.dailyCheckinScreen;
 
   static final routes = [
     GetPage(

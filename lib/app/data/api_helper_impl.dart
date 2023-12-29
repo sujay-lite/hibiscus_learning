@@ -47,11 +47,19 @@ class ApiHelperImpl extends GetConnect implements ApiHelper {
   }
 
   @override
-  Future<Response<dynamic>> getCategories(){
+  Future<Response<dynamic>> getCategories() {
     final queryParam = {
-      'fields[1]':'category_name'
+      'fields[1]': 'category_name',
+      'pagination[pageSize]': '100',
+      'sort[1]': 'category_name'
     };
 
     return get(Constants.categoryUrl, query: queryParam);
+  }
+
+  @override
+  Future<Response<dynamic>> postCheckInAnswers(AnswerResponse answers) {
+    // TODO: Put the right post endpoint for answers
+    return post('checkin/answers', json.encode(answers.toJson()));
   }
 }

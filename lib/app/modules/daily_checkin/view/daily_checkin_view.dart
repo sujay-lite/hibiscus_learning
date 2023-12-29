@@ -8,150 +8,203 @@ class DailyCheckinView extends GetView<DailyCheckinController> {
     return GetBuilder<DailyCheckinController>(
       init: DailyCheckinController(),
       builder: (controller) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: AppColors.kPrimaryColor,
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Stack(
+        return Scaffold(
+          backgroundColor: AppColors.kPrimaryColor,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Obx(
+              () => Stack(
                 children: [
-                  ListView.builder(
-                    itemCount: controller.checkInQuestions.length ?? 0,
-                    itemBuilder: (context, ind) {
-                      return Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Obx(
-                          () => Visibility(
-                            visible:
-                                controller.currentQuestionIndex.value == ind,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 60),
-                                StepProgressIndicator(
-                                  totalSteps:
-                                      controller.checkInQuestions.length ?? 1,
-                                  currentStep: ind + 1,
-                                  selectedColor: AppColors.kSecColor,
-                                  unselectedColor: AppColors.grey,
-                                  padding: 7,
-                                  size: 3,
-                                ),
-                                const SizedBox(height: 30),
-                                Text(
-                                  Strings.dailyCheckIn,
-                                  style: Utils.kParagraphTextStyle.copyWith(
-                                      color: AppColors.white, fontSize: 17),
-                                ),
-                                const SizedBox(height: 40),
-                                Container(
-                                  height: 50,
-                                  width: Get.width / 2.2,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: AppColors.grey.withOpacity(0.5)),
-                                  child: Center(
-                                    child: Text(
-                                      "${controller.checkInQuestions[ind].checkinCategory}",
-                                      style: Utils.kParagraphTextStyle
-                                          .copyWith(color: AppColors.white),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 50),
-                                Text(
-                                  "${controller.checkInQuestions[ind].question}",
-                                  style: Utils.kVeryLargeText
-                                      .copyWith(color: AppColors.white),
-                                ),
-                                const SizedBox(height: 30),
-                                Wrap(
-                                  children: List.generate(
-                                    //TODO:Change the index acc to the current question
-                                    controller.checkInQuestions[ind].options
-                                            ?.length ??
-                                        0,
-                                    (index) => Padding(
-                                      padding: const EdgeInsets.all(0.0),
-                                      child: Obx(
-                                        () => Theme(
-                                          data: ThemeData(
-                                            splashColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
+                  Container(),
+                  controller.currentQuestionIndex.value ==
+                          controller.checkInQuestions.length
+                      ? Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 50,
+                                backgroundColor:
+                                    AppColors.kSecColor.withOpacity(.3),
+                                child: Utils.assetSVGImage(
+                                    AppImages.greenVerified,
+                                    height: 80),
+                              ),
+                              const SizedBox(height: 20),
+                              Text(
+                                "Great job ${"John"}!",
+                                style: Utils.kBigText.copyWith(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              const SizedBox(height: 20),
+                              Text(
+                                Strings.completedTodayCheckIn,
+                                style: Utils.kParagraphTextStyle
+                                    .copyWith(color: AppColors.white),
+                              ),
+                              const SizedBox(height: 70),
+                              Text(
+                                Strings.reminderTomorrow,
+                                style: Utils.kParagraphTextStyle
+                                    .copyWith(color: AppColors.white),
+                              ),
+                            ],
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: controller.checkInQuestions.length,
+                          itemBuilder: (context, ind) {
+                            return Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Obx(
+                                () => Visibility(
+                                  visible:
+                                      controller.currentQuestionIndex.value ==
+                                          ind,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 60),
+                                      StepProgressIndicator(
+                                        totalSteps:
+                                            controller.checkInQuestions.length,
+                                        currentStep: ind + 1,
+                                        selectedColor: AppColors.kSecColor,
+                                        unselectedColor: AppColors.grey,
+                                        padding: 7,
+                                        size: 3,
+                                      ),
+                                      const SizedBox(height: 30),
+                                      Text(
+                                        Strings.dailyCheckIn,
+                                        style: Utils.kParagraphTextStyle
+                                            .copyWith(
+                                                color: AppColors.white,
+                                                fontSize: 17),
+                                      ),
+                                      const SizedBox(height: 40),
+                                      Container(
+                                        height: 50,
+                                        width: Get.width / 2.2,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: AppColors.grey
+                                                .withOpacity(0.5)),
+                                        child: Center(
+                                          child: Text(
+                                            "${controller.checkInQuestions[ind].checkinCategory}",
+                                            style: Utils.kParagraphTextStyle
+                                                .copyWith(
+                                                    color: AppColors.white),
                                           ),
-                                          child: InkWell(
-                                            onTap: () {
-                                              // TODO: SELECT THE ANS FOR THE GIVEN QUESTION AND SAVE IT IN A LIST
-                                              if (controller.answers.length ==
-                                                  ind + 1) {
-                                                controller
-                                                    .answers[ind] = controller
-                                                        .checkInQuestions[ind]
-                                                        .options?[index] ??
-                                                    "";
-                                              } else {
-                                                controller.answers.add(
-                                                    controller
-                                                            .checkInQuestions[
-                                                                ind]
-                                                            .options?[index] ??
-                                                        "");
-                                              }
-
-                                              controller.selectedOptionIndex
-                                                  .value = index + 1;
-                                            },
-                                            child: Card(
-                                              elevation: 0,
-                                              color:
-                                                  controller.selectedOptionIndex
-                                                                  .value -
-                                                              1 ==
-                                                          index
-                                                      ? AppColors.kTierColor
-                                                      : AppColors.kTierColor
-                                                          .withOpacity(0.2),
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(30),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 50),
+                                      Text(
+                                        "${controller.checkInQuestions[ind].question}",
+                                        style: Utils.kVeryLargeText
+                                            .copyWith(color: AppColors.white),
+                                      ),
+                                      const SizedBox(height: 30),
+                                      Wrap(
+                                        children: List.generate(
+                                          //TODO:Change the index acc to the current question
+                                          controller.checkInQuestions[ind]
+                                                  .options?.length ??
+                                              0,
+                                          (index) => Padding(
+                                            padding: const EdgeInsets.all(0.0),
+                                            child: Obx(
+                                              () => Theme(
+                                                data: ThemeData(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
                                                 ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 15.0,
-                                                        horizontal: 25),
-                                                child: Text(
-                                                  "${controller.checkInQuestions[ind].options?[index]}",
-                                                  style: Utils
-                                                      .kParagraphTextStyle
-                                                      .copyWith(
-                                                          color:
-                                                              AppColors.white),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    // TODO: SELECT THE ANS FOR THE GIVEN QUESTION AND SAVE IT IN A LIST
+                                                    if (controller
+                                                            .answers.length ==
+                                                        ind + 1) {
+                                                      controller.answers[
+                                                          ind] = controller
+                                                              .checkInQuestions[
+                                                                  ind]
+                                                              .options?[index] ??
+                                                          "";
+                                                    } else {
+                                                      controller.answers.add(controller
+                                                              .checkInQuestions[
+                                                                  ind]
+                                                              .options?[index] ??
+                                                          "");
+                                                    }
+
+                                                    controller
+                                                        .selectedOptionIndex
+                                                        .value = index + 1;
+                                                  },
+                                                  child: Card(
+                                                    elevation: 0,
+                                                    color:
+                                                        controller.selectedOptionIndex
+                                                                        .value -
+                                                                    1 ==
+                                                                index
+                                                            ? AppColors
+                                                                .kTierColor
+                                                            : AppColors
+                                                                .kTierColor
+                                                                .withOpacity(
+                                                                    0.2),
+                                                    shape:
+                                                        const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(30),
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 15.0,
+                                                          horizontal: 25),
+                                                      child: Text(
+                                                        "${controller.checkInQuestions[ind].options?[index]}",
+                                                        style: Utils
+                                                            .kParagraphTextStyle
+                                                            .copyWith(
+                                                                color: AppColors
+                                                                    .white),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
                   Obx(
                     () => Positioned(
                       bottom: 30,
                       child: InkWell(
                         onTap: controller.currentQuestionIndex.value ==
-                                    controller.checkInQuestions.length - 1 ||
+                                    controller.checkInQuestions.length ||
                                 controller.selectedOptionIndex.value == 100
                             ? null
                             : () {
@@ -163,7 +216,7 @@ class DailyCheckinView extends GetView<DailyCheckinController> {
                           height: 50,
                           color: controller.selectedOptionIndex.value == 100 ||
                                   controller.currentQuestionIndex.value ==
-                                      controller.checkInQuestions.length - 1
+                                      controller.checkInQuestions.length
                               ? AppColors.kSecColor.withOpacity(0.2)
                               : AppColors.kSecColor,
                           shadowColor: AppColors.transparent,

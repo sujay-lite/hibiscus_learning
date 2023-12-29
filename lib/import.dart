@@ -110,3 +110,4 @@ export 'package:hibiscus_learning/app/data/interface_controller/api_interface_co
 export 'app/data/models/article_model.dart';
 export 'app/data/models/category_model.dart';
 export 'app/data/models/chekin_model.dart';
+export 'app/data/models/answers_model.dart';

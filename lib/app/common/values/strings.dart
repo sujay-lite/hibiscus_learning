@@ -58,6 +58,10 @@ abstract class Strings {
   ///Daily Check-in Module
   static const String dailyCheckIn = "Daily Check-in";
   static const String next = "Next";
+  static const String completedTodayCheckIn =
+      "You have completed today’s check-in!";
+  static const String reminderTomorrow =
+      "We will send a reminder tomorrow just in case";
 
   ///Article Module
   static const String articleHeading =

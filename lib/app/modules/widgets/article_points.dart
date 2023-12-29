@@ -25,10 +25,10 @@ class ArticlePoints extends StatelessWidget {
             flex: 1,
             child: Column(
               children: [
-                const SizedBox(height:5 ),
-                content != "null" || subheading != "null"?
-                Utils.assetSVGImage(AppImages.hibiscusFlower, height: 12)
-                : const SizedBox(),
+                const SizedBox(height: 5),
+                content != "null" || subheading != "null"
+                    ? Utils.assetSVGImage(AppImages.hibiscusFlower, height: 12)
+                    : const SizedBox(),
               ],
             )),
         const SizedBox(width: 5),
@@ -37,24 +37,23 @@ class ArticlePoints extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              subheading != "null" ?
-              Text(
-                subheading,
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-                style: Utils.kParagraphTextStyle
-                    .copyWith(fontWeight: FontWeight.w600),
-              )
-              :const SizedBox(),
-
-              content != "null" ?
-              Text(
-                content,
-                maxLines: 40,
-                overflow: TextOverflow.ellipsis,
-                style: Utils.kParagraphTextStyle,
-              )
-                  : const SizedBox() ,
+              subheading != "null"
+                  ? Text(
+                      subheading,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: Utils.kParagraphTextStyle
+                          .copyWith(fontWeight: FontWeight.w600),
+                    )
+                  : const SizedBox(),
+              content != "null"
+                  ? Text(
+                      content,
+                      maxLines: 40,
+                      overflow: TextOverflow.ellipsis,
+                      style: Utils.kParagraphTextStyle,
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),
